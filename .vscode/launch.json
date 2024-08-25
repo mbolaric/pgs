@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'pgs'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=pgs"
+                ],
+                "filter": {
+                    "name": "pgs",
+                    "kind": "lib"
+                }
+            },
+            "args": [                
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'read_sup_file'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=read_sup_file",
+                    "--package=pgs"
+                ],
+                "filter": {
+                    "name": "read_sup_file",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'parse_sup_file'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=parse_sup_file",
+                    "--package=pgs"
+                ],
+                "filter": {
+                    "name": "parse_sup_file",
+                    "kind": "example"
+                }
+            },
+            "args": [
+                "--pgs-file-name=./examples/data/BluRay.sup",
+                "--tiff-file-name=./examples/data/out.tiff",
+                "--display-set=0"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+    ]
+}
