@@ -1,3 +1,25 @@
+//! # PGS Parsing Library
+//!
+//! This library provides functionality for parsing PGS (Presentation Graphic Stream) subtitles,
+//! commonly used in Blu-ray media. It defines various modules and components needed for reading,
+//! decoding, and processing PGS files.
+//!
+//! ### Example Usage
+//! ```rust
+//! use pgs::PgsParser;
+//!
+//! let parser = PgsParser::parse("subtitle.sup");
+//! match parser {
+//!     Ok(parser) => {
+//!         let ds = parser.get_display_sets();
+//!         // ...
+//!     },
+//!     Err(err) => {
+//!         // ...
+//!     }
+//! }
+//! ```
+
 mod pgs_error;
 mod pgs_decode_rle;
 mod pgs_read;
@@ -37,7 +59,10 @@ pub use pgs_pds_segment::{
     PgsPdsSegmentPaletteEntry
 };
 pub use pgs_display_set::{PgsDisplaySet, PgsDisplaySetState};
-pub use pgs_ods_segment::PgsOdsSegment;
+pub use pgs_ods_segment::{
+    PgsOdsSegment,
+    PgsOdsSequenceFlag
+};
 pub use pgs_reader::PgsReader;
 pub use pgs_parser::PgsParser;
 pub use pgs_error::{
