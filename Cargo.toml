@@ -3,6 +3,7 @@ name = "pgs-parse"
 version = "0.1.0"
 authors = ["Milan Bolaric"]
 edition = "2021"
+license = "MIT"
 
 description = "Parse Presentation Graphic Stream (SUP files)"
 
