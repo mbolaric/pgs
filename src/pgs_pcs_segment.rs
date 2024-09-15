@@ -1,7 +1,15 @@
+//! # PGS Presentation Composition Segment (PCS)
+//!
+//! This module defines the `PgsPcsSegment` struct, which represents the Presentation Composition Segment (PCS)
+//! in the Presentation Graphic Stream (PGS) format. The PCS provides the details of how the subtitles (or other
+//! graphic elements) are arranged and displayed on the screen.
+
 use std::rc::Rc;
 
 use crate::{pgs_memory_buffer::{BigEndian, ReadBytes}, pgs_segment_header::PgsSegmentHeader, Error, PgsMemoryBuffer, Result};
 
+/// Enum representing the object cropping flag in a PCS.
+/// This flag indicates whether the object (subtitle image) is cropped and whether a forced cropped image should be used.
 #[derive(Debug, PartialEq)]
 pub enum PgsPcsObjectCroppedFlag {
     ForceCroppedImage = 0x40,
@@ -9,6 +17,13 @@ pub enum PgsPcsObjectCroppedFlag {
 }
 
 impl From<u8> for PgsPcsObjectCroppedFlag {
+    /// Converts a raw `u8` value to the corresponding `PgsPcsObjectCroppedFlag` enum variant.
+    ///
+    /// # Parameters
+    /// - `value`: The raw `u8` value representing the cropped flag.
+    ///
+    /// # Returns
+    /// The corresponding `PgsPcsObjectCroppedFlag` variant.    
     fn from(value: u8) -> Self {
         match value {
             0x40 => PgsPcsObjectCroppedFlag::ForceCroppedImage,
@@ -17,6 +32,8 @@ impl From<u8> for PgsPcsObjectCroppedFlag {
     }
 }
 
+/// Struct representing a composition object in a PCS.
+/// Composition objects describe the individual graphic elements that make up the subtitle image and its placement on the screen.
 #[derive(Debug)]
 pub struct PgsPcsSegmentCompositionObjects {
     pub object_id: u16,
@@ -46,6 +63,8 @@ impl PgsPcsSegmentCompositionObjects {
     }
 }
 
+/// Enum representing the composition state of a PCS.
+/// The composition state describes whether the segment starts a new display, refreshes an existing display, or updates a display.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PgsPcsCompositionState {
     // Defines a new display.
@@ -57,6 +76,13 @@ pub enum PgsPcsCompositionState {
 }
 
 impl From<u8> for PgsPcsCompositionState {
+    /// Converts a raw `u8` value to the corresponding `PgsPcsCompositionState` enum variant.
+    ///
+    /// # Parameters
+    /// - `value`: The raw `u8` value representing the composition state.
+    ///
+    /// # Returns
+    /// The corresponding `PgsPcsCompositionState` variant.    
     fn from(value: u8) -> Self {
         match value {
             0x80 => PgsPcsCompositionState::EpochStart,
@@ -80,6 +106,8 @@ pub struct PgsPcsSegment {
     pub composition_objects: Vec<PgsPcsSegmentCompositionObjects>
 }
 
+/// Struct representing a Presentation Composition Segment (PCS) in a PGS file.
+/// The PCS defines how individual graphic objects (subtitles, etc.) are displayed on the screen, their position, and composition state.
 impl PgsPcsSegment {
     fn new(header: PgsSegmentHeader) -> Self {
         PgsPcsSegment {
@@ -96,6 +124,13 @@ impl PgsPcsSegment {
         }
     }
 
+    /// Creates a new, empty `PgsPcsSegment`.
+    ///
+    /// # Parameters
+    /// - `header`: The segment header for the PCS.
+    ///
+    /// # Returns
+    /// A new `PgsPcsSegment` instance with default values for the composition objects.
     pub fn from_data(header: PgsSegmentHeader, data: &[u8]) -> Result<Rc<PgsPcsSegment>> {
         if data.len() < header.segment_length as usize {
             return Err(Error::InvalidSegmentDataLength);

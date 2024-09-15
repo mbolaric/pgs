@@ -2,6 +2,10 @@ use std::rc::Rc;
 
 use crate::{pgs_memory_buffer::{BigEndian, ReadBytes}, Error, PgsMemoryBuffer, PgsSegmentHeader, Result};
 
+/// Represents the definition of a display window within a Window Definition Segment (WDS).
+///
+/// The `PgsWdsSegmentWindowDefinition` structure contains details about the position and size of
+/// a window where subtitles will be displayed on the screen.
 #[derive(Debug)]
 pub struct PgsWdsSegmentWindowDefinition {
     pub window_id: u8,
@@ -27,6 +31,10 @@ impl PgsWdsSegmentWindowDefinition {
     }
 }
 
+/// Represents a Window Definition Segment (WDS) in a Presentation Graphic Stream (PGS).
+///
+/// The `PgsWdsSegment` structure contains information about multiple windows used for displaying subtitles.
+/// Each window is defined by its ID, position, and size.
 #[derive(Debug)]
 pub struct PgsWdsSegment {
     pub header: PgsSegmentHeader,
@@ -43,6 +51,15 @@ impl PgsWdsSegment {
         }
     }
 
+    /// Parses a `PgsWdsSegment` from raw data.
+    ///
+    /// # Parameters
+    /// - `header`: The segment header.
+    /// - `data`: Raw byte data containing the segment information.
+    ///
+    /// # Returns
+    /// - `Ok(Rc<PgsWdsSegment>)`: A reference-counted pointer to the parsed `PgsWdsSegment`.
+    /// - `Err(Error)`: An error if the data is invalid or cannot be parsed.
     pub fn from_data(header: PgsSegmentHeader, data: &[u8]) -> Result<Rc<PgsWdsSegment>> {
         if data.len() < header.segment_length as usize {
             return Err(Error::InvalidSegmentDataLength);

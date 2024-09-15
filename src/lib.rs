@@ -6,7 +6,7 @@
 //!
 //! ### Example Usage
 //! ```rust
-//! use pgs::PgsParser;
+//! use pgs_parse::PgsParser;
 //!
 //! let parser = PgsParser::parse("subtitle.sup");
 //! match parser {

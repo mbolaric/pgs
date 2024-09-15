@@ -6,7 +6,7 @@ use log::error;
 use clap::Parser;
 use tiff::{encoder::{colortype, TiffEncoder}, tags};
 
-use pgs::{PgsDisplaySet, PgsDisplaySetState, PgsParser, Result};
+use pgs_parse::{PgsDisplaySet, PgsDisplaySetState, PgsParser, Result};
 
 use crate::helpers::init_logging;
 

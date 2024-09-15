@@ -1,7 +1,15 @@
+//! # PGS Palette Definition Segment (PDS)
+//!
+//! This module defines the `PgsPdsSegment` struct, which represents the Palette Definition Segment (PDS)
+//! in the Presentation Graphic Stream (PGS) format. The PDS defines color palettes used by the subtitles
+//! or other graphical elements in a PGS file.
+
 use std::{io::Read, rc::Rc};
 
 use crate::{pgs_memory_buffer::ReadBytes, Error, PgsMemoryBuffer, PgsSegmentHeader, Result};
 
+/// Struct representing an individual palette entry in a PDS.
+/// Each palette entry consists of the palette ID and its corresponding color values (Y, Cr, Cb).
 #[derive(Debug)]
 pub struct PgsPdsSegmentPaletteEntry {
     pub palette_entry_id: u8,
@@ -27,6 +35,8 @@ impl PgsPdsSegmentPaletteEntry {
     }
 }
 
+/// Struct representing a Palette Definition Segment (PDS) in a PGS file.
+/// The PDS defines a color palette that can be used by various objects in the PGS file.
 #[derive(Debug)]
 pub struct PgsPdsSegment {
     pub header: PgsSegmentHeader,
@@ -48,6 +58,20 @@ impl PgsPdsSegment {
         }
     }
 
+    /// Parses a `PgsPdsSegment` from the provided header and raw data buffer.
+    ///
+    /// This method reads the palette ID, version number, and individual palette entries from the data buffer.
+    /// Each palette entry consists of luminance, color difference (Cr, Cb), and transparency values.
+    ///
+    /// # Parameters
+    /// - `header`: The segment header.
+    /// - `data`: A slice of raw data representing the contents of the PDS segment.
+    ///
+    /// # Errors
+    /// Returns `Error::InvalidSegmentDataLength` if the length of the provided data is less than expected.
+    ///
+    /// # Returns
+    /// An `Rc<PgsPdsSegment>` containing the parsed segment.
     pub fn from_data(header: PgsSegmentHeader, data: &[u8]) -> Result<Rc<PgsPdsSegment>> {
         if data.len() < header.segment_length as usize {
             return Err(Error::InvalidSegmentDataLength);

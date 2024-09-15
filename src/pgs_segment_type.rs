@@ -1,14 +1,20 @@
 use std::fmt::Display;
 
-
+/// Represents the type of a segment in a Presentation Graphic Stream (PGS).
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum PgsSegmentType {
-    PDS = 0x14, // Palette Definition Segment 
-	ODS = 0x15, // Object Definition Segment 
-	PCS = 0x16, // Presentation Composition Segment 
-	WDS = 0x17, // Window Definition Segment 
-	END = 0x80, // End of Display Set Segment 
-	ERR = 0x00  // Error in Segment
+    /// Palette Definition Segment 
+    PDS = 0x14,
+    /// Object Definition Segment 
+	ODS = 0x15,
+    /// Presentation Composition Segment 
+	PCS = 0x16,
+    /// Window Definition Segment 
+	WDS = 0x17,
+    /// End of Display Set Segment 
+	END = 0x80,
+    /// Error in Segment
+	ERR = 0x00  
 }
 
 impl Display for PgsSegmentType {
@@ -25,6 +31,13 @@ impl Display for PgsSegmentType {
 }
 
 impl From<u8> for PgsSegmentType {
+    /// Converts a `u8` value to a `PgsSegmentType`.
+    ///
+    /// # Parameters
+    /// - `value`: The `u8` value representing the segment type.
+    ///
+    /// # Returns
+    /// The corresponding `PgsSegmentType`. Returns `PgsSegmentType::ERR` for unknown values.
 	fn from(value: u8) -> Self {
 		match value {
 			0x14 => PgsSegmentType::PDS,

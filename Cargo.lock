@@ -446,7 +446,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pgs"
+name = "pgs-parse"
 version = "0.1.0"
 dependencies = [
  "clap",

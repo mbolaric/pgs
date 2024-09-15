@@ -1,8 +1,12 @@
 [package]
-name = "pgs"
+name = "pgs-parse"
 version = "0.1.0"
 authors = ["Milan Bolaric"]
 edition = "2021"
+
+description = "Parse Presentation Graphic Stream (SUP files)"
+
+keywords = ["SubTitle", "SUP", "PGS"]
 
 [dependencies]
 log = { version = "0.4.17", features = ["max_level_debug", "release_max_level_warn"] }

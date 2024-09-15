@@ -1,6 +1,6 @@
 use log::{debug, error};
 
-use pgs::{Error, PgsFile, PgsOdsSegment, PgsPcsSegment, PgsPdsSegment, PgsReader, PgsSegment, PgsSegmentHeader, PgsSegmentType, PgsWdsSegment, Result};
+use pgs_parse::{Error, PgsFile, PgsOdsSegment, PgsPcsSegment, PgsPdsSegment, PgsReader, PgsSegment, PgsSegmentHeader, PgsSegmentType, PgsWdsSegment, Result};
 
 mod helpers;
 use crate::helpers::init_logging;
