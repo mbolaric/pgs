@@ -19,9 +19,9 @@ keywords = ["SubTitle", "SUP", "PGS"]
 categories = ["parser-implementations"]
 
 [dependencies]
-log = { version = "0.4.17", features = ["max_level_debug", "release_max_level_warn"] }
+log = { version = "0.4.33", features = ["max_level_debug", "release_max_level_warn"] }
 
 [dev-dependencies]
-log4rs = "1.3.0"
-tiff = "0.9.1"
-clap = { version = "4.5.18", features = ["derive"] }
+log4rs = "1.4.0"
+tiff = "0.11.3"
+clap = { version = "4.6.3", features = ["derive"] }
