@@ -1,12 +1,12 @@
 [package]
 name = "pgs-parse"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Milan Bolaric"]
 edition = "2021"
 include = [
     "src/**/*",
     "Cargo.toml",
-    "README.md", 
+    "README.md",
     "LICENSE"
 ]
 license = "MIT"
