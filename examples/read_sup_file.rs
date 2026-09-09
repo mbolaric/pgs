@@ -14,9 +14,8 @@ fn read_segment(file: &mut PgsFile) -> Result<PgsSegment> {
         return Err(Error::ReadInvalidSegment);
     }
 
-    let mut buffer = Vec::with_capacity(header.segment_length as usize);
-    buffer.resize(header.segment_length as usize, 0);
-    file.read_bytes(&mut buffer.as_mut_slice())?;
+    let mut buffer = vec![0; header.segment_length as usize];
+    file.read_bytes(buffer.as_mut_slice())?;
 
     let segment = match header.segment_type {
         PgsSegmentType::PCS => {            

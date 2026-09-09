@@ -1,6 +1,6 @@
 [package]
 name = "pgs-parse"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Milan Bolaric"]
 edition = "2021"
 include = [
@@ -19,9 +19,9 @@ keywords = ["SubTitle", "SUP", "PGS"]
 categories = ["parser-implementations"]
 
 [dependencies]
-log = { version = "0.4.33", features = ["max_level_debug", "release_max_level_warn"] }
+log = { version = "0.4.34", features = ["max_level_debug", "release_max_level_warn"] }
 
 [dev-dependencies]
 log4rs = "1.4.0"
 tiff = "0.11.3"
-clap = { version = "4.6.3", features = ["derive"] }
+clap = { version = "4.6.6", features = ["derive"] }

@@ -11,8 +11,8 @@ use pgs_parse::{PgsDisplaySet, PgsDisplaySetState, PgsParser, Result};
 use crate::helpers::init_logging;
 
 pub fn num_to_bytes(dest: &mut [u8], num: u64, length: usize) {
-    for i in 0..length {
-        dest[i] = ((num >> (i * 8)) & 0xFF) as u8;
+    for (i, byte) in dest.iter_mut().enumerate().take(length) {
+        *byte = ((num >> (i * 8)) & 0xFF) as u8;
     }
 }
 
