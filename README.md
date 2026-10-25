@@ -1,4 +1,5 @@
 # Presentation Graphic Stream (pgs-parse)
+
 A Rust library for parsing and decoding Blu-ray Presentation Graphic Stream (PGS/SUP) subtitle files.
 
 [![Build Status][actions-badge]][actions-url]
@@ -12,9 +13,10 @@ A Rust library for parsing and decoding Blu-ray Presentation Graphic Stream (PGS
 ## Installation
 
 Add to your `Cargo.toml`:
+
 ```toml
 [dependencies]
-pgs-parse = "0.1.2"
+pgs-parse = "0.1.3"
 ```
 
 ## Usage
@@ -37,16 +39,19 @@ for ds in parser.get_display_sets() {
 ## Running Examples
 
 Export a subtitle frame to a TIFF image:
+
 ```bash
 cargo run --example parse_sup_file -- -p examples/data/BluRay.sup -t output.tiff -d 0
 ```
 
 Read and inspect segments from a SUP file:
+
 ```bash
 cargo run --example read_sup_file
 ```
 
 ## Testing
+
 ```bash
 cargo test
 ```
